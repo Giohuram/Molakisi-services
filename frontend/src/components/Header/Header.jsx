@@ -10,8 +10,8 @@ const navlinks = [
     display:'Home'
   }, 
   {
-    path:'/tutors',
-    display:'Find a Tutor'
+    path:'/doctors',
+    display:'Find a Doctor'
   }, 
   {
     path:'/services',
@@ -68,7 +68,7 @@ const Header = () => {
 
           {/* nav right */}
           <div className='flex items-center gap-4'>
-            <div>
+            <div className='hidden'>
               <Link to='/'>
                <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
                 <img src={userImg} className='w-full rounded-full' alt="" /> 
