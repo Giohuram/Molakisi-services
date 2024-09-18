@@ -3,11 +3,15 @@ import { updateTutor, deleteTutor, getSingleTutor, getAllTutor }from "../Control
 
 import { authenticate, restrict } from '../auth/verifyToken.js';
 
+import reviewRouter from './review.js'
+
 const router = express.Router()
 
-router.get('/:id', getSingleTutor)
-router.get('/', getAllTutor)
-router.put('/:id', authenticate, restrict(["tutor"]),  updateTutor)
-router.delete('/:id', authenticate, restrict(["tutor"]),  deleteTutor)
+// nested route 
+router.use("/:tutorId/reviews", reviewRouter); 
+router.get('/:id', getSingleTutor); 
+router.get('/', getAllTutor); 
+router.put('/:id', authenticate, restrict(["tutor"]),  updateTutor); 
+router.delete('/:id', authenticate, restrict(["tutor"]),  deleteTutor); 
 
 export default router; 

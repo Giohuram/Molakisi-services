@@ -35,7 +35,7 @@ export const getSingleTutor = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const Tutor = await Tutor.findById(id).select("-password");;
+        const Tutor = await Tutor.findById(id).populate("reviews").select("-password");
         if (!user) {
             return res.status(404).json({ success: false, message: 'Utilisateur non trouvé' });
         }
