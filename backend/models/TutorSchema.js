@@ -41,4 +41,4 @@ const TutorSchema = new mongoose.Schema({
   appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
 });
 
-export default mongoose.model("tutor", TutorSchema);
+export default mongoose.model("Tutor", TutorSchema);
