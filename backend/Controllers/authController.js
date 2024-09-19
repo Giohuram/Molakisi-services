@@ -1,11 +1,8 @@
 import User from '../models/UserSchema.js';
-import Tutor from '../models/TutorSchema.js'; // Renamed to 'Tutor' to avoid conflict
+import Tutor from '../models/TutorSchema.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-
-// Generate a 256-byte random secret key and encode it as a base64 string
-const secretKey = crypto.randomBytes(256).toString('base64');
 
 // Generate JWT token
 const generateToken = (user) => {
@@ -62,8 +59,8 @@ export const register = async (req, res) => {
         res.status(200).json({ success: true, message: 'Utilisateur créé avec succès' });
 
     } catch (error) {
+        console.error(error); // Log the error for debugging
         res.status(500).json({ success: false, message: 'Internal server error, Try again later' });
-        console.log(error);
     }
 };
 
@@ -96,22 +93,16 @@ export const login = async (req, res) => {
             return res.status(400).json({ status: false, message: 'Invalid credentials' });
         }
 
-        // Ensure user._doc exists before destructuring
-        if (user._doc) {
-            // Generate JWT token
-            const token = generateToken(user);
+        // Generate JWT token
+        const token = generateToken(user);
 
-            // Exclude sensitive data
-            const { password, role, appointment, ...rest } = user._doc;
+        // Exclude sensitive data
+        const { password: _, role, appointment, ...rest } = user._doc;
 
-            return res.status(200).json({ status: true, message: 'Connecté avec succès', token, data: { ...rest }, role });
-        } else {
-            return res.status(500).json({ status: false, message: 'Internal server error' });
-        }
+        return res.status(200).json({ status: true, message: 'Connecté avec succès', token, data: { ...rest }, role });
 
     } catch (error) {
+        console.error(error); // Log the error for debugging
         res.status(400).json({ status: false, message: 'Echec de connexion' });
-        // console.log(error);
     }
 };
-
