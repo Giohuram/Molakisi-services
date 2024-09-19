@@ -1,4 +1,5 @@
 import Tutor from '../models/TutorSchema.js';
+import Booking from '../models/BookingSchema.js';
 
 export const updateTutor = async (req, res) => {
     const id = req.params.id;
@@ -70,3 +71,23 @@ export const getAllTutor = async (req, res) => {
         res.status(500).json({ success: false, message: 'Erreur serveur' });
     }
 };
+
+
+export const getTutorProfile = async (req,res)=>{
+    const tutorId = req.userId
+
+    try {
+        const tutor = await Tutor.findById(tutorId)
+
+        if(!user){
+            return res.status(404).json({success:false, message:'Tutor not found'})
+        }
+        const {password, ...rest}  = Tutor._doc
+        const appointments = await Booking.find({tutor: tutorId }); 
+
+        res.status(200).json({success:true, message: 'Profile info is getting', data:{... rest, appointments}})
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
+}

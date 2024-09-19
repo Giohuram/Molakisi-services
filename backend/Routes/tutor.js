@@ -1,5 +1,5 @@
 import express from 'express';
-import { updateTutor, deleteTutor, getSingleTutor, getAllTutor }from "../Controllers/tutorController.js";
+import { updateTutor, deleteTutor, getSingleTutor, getAllTutor, getTutorProfile }from "../Controllers/tutorController.js";
 
 import { authenticate, restrict } from '../auth/verifyToken.js';
 
@@ -14,5 +14,7 @@ router.get('/:id', getSingleTutor);
 router.get('/', getAllTutor); 
 router.put('/:id', authenticate, restrict(["tutor"]),  updateTutor); 
 router.delete('/:id', authenticate, restrict(["tutor"]),  deleteTutor); 
+
+router.get('/profile/me', authenticate, restrict(['tutor']), getTutorProfile)
 
 export default router; 
