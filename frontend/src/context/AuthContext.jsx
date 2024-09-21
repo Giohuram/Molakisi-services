@@ -27,6 +27,10 @@ const authReducer = (state, action) => {
         role: action.payload.role,
       };
     case 'LOGOUT':
+      // Clear localStorage when logging out
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
       return {
         user: null,
         role: null,
@@ -41,18 +45,14 @@ const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Sync state with localStorage
+  // Sync state with localStorage on login
   useEffect(() => {
     if (state.user && state.token && state.role) {
       localStorage.setItem('user', JSON.stringify(state.user));
       localStorage.setItem('token', state.token);
       localStorage.setItem('role', state.role);
-    } else {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      localStorage.removeItem('role');
     }
-  }, [state]);
+  }, [state.user, state.token, state.role]);
 
   // Initialize state from localStorage on page load
   useEffect(() => {
@@ -70,7 +70,7 @@ export const AuthContextProvider = ({ children }) => {
         },
       });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

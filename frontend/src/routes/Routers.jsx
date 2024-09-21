@@ -3,10 +3,13 @@ import Services from '../pages/Services';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Contact from '../pages/Contact';
-import Doctors from '../pages/Doctors/Doctors';
-import DoctorDetails from '../pages/Doctors/DoctorDetails';
+import Doctors from '../pages/Tutors/Tutors';
+import TutorDetails from '../pages/Tutors/TutorDetails';
+import  MyAccount from '../Dashboard/user-account/MyAccount'
+import Dashboard from '../Dashboard/tutor-account/Dashboard';
 
 import { Routes, Route } from 'react-router-dom'; 
+import ProtectedRoute from './ProctectedRoute';
 
 
 const Routers = () => {
@@ -18,8 +21,10 @@ const Routers = () => {
       <Route path="/Login" element={<Login />} /> 
       <Route path="/Signup" element={<Signup />} /> 
       <Route path="/Contact" element={<Contact />} /> 
-      <Route path="/doctors" element={<Doctors />} /> 
-      <Route path="/doctors/:id" element={<DoctorDetails />} /> 
+      <Route path="/tutors" element={<Doctors />} /> 
+      <Route path="/tutors/:id" element={<TutorDetails />} /> 
+      <Route path="/users/profile/me" element={<ProtectedRoute allowedRoles={['student']}><MyAccount /></ProtectedRoute>} /> 
+      <Route path="/tutors/profile/me" element={<ProtectedRoute allowedRoles={['tutor']}><Dashboard /></ProtectedRoute>} /> 
     </Routes>
   )
 }

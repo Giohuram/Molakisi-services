@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../config.js';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../context/authContext.jsx';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const Login = () => {
   const [formData, setFormData] = useState({

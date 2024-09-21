@@ -1,8 +1,8 @@
-import Doctorcard from "../../components/Doctors/Doctorcard";
+import TutorCard from "../../components/Tutors/TutorCard";
 import { doctors } from "../../assets/data/doctors"; 
 import Testimonial from "../../components/Testimonial/Testimonial";
 
-const Doctors = () => {
+const Tutors = () => {
   return (
     <>
       <section className="bg-[#fff9ea]">
@@ -21,7 +21,7 @@ const Doctors = () => {
       <section>
         <div className="container">
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
-              {doctors.map((doctor) => <Doctorcard key={doctor.id} doctor={doctor} />)}
+              {doctors.map((doctor) => <TutorCard key={doctor.id} doctor={doctor} />)}
           </div>
         </div>
       </section>
@@ -40,4 +40,4 @@ const Doctors = () => {
   )
 }
 
-export default Doctors; 
+export default Tutors; 

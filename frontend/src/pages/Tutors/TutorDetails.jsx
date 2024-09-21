@@ -2,12 +2,12 @@
 import { useState } from 'react'; 
 import doctorImg from "../../assets/images/doctor-img02.png";
 import starIcon from "../../assets/images/Star.png"
-import DoctorAbout from '../../components/Doctors/DoctorAbout';
-import Feedback from '../../components/Doctors/Feedback';
-import SidePanel from '../../components/Doctors/SidePanel';
+import TutorAbout from '../../components/Tutors/TutorAbout';
+import Feedback from '../../components/Tutors/Feedback';
+import SidePanel from '../../components/Tutors/SidePanel';
 
 
-const DoctorDetails = () => {
+const TutorDetails = () => {
   const [tab, setTab] = useState('about')
 
   return (
@@ -60,7 +60,7 @@ const DoctorDetails = () => {
                   
                   <div className="mt-[50px]">
                     {
-                      tab=='about' && <DoctorAbout />
+                      tab=='about' && <TutorAbout />
                     }
                     {
                       tab=='feedback' && <Feedback />
@@ -72,4 +72,4 @@ const DoctorDetails = () => {
   )
 }
 
-export default DoctorDetails
+export default TutorDetails
