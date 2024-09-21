@@ -20,6 +20,6 @@ router.delete('/:id', authenticate, restrict(["student"]), deleteUser);
 router.get('/profile/me', authenticate, restrict(["student"]), getUserProfile);
 
 // Route to get the current user's appointments
-router.get('/appointment/my-appointments', authenticate, restrict(["student"]), getMyAppointment);
+router.get('/appointments/my-appointments', authenticate, restrict(["student"]), getMyAppointment);
 
 export default router;
