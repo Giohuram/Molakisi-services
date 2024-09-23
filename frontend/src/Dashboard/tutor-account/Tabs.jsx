@@ -25,14 +25,14 @@ const Tabs = ({ tab, setTab }) => {
                     className={`${tab === 'overview' ? 'bg-indigo-100 text-primaryColor' : 'bg-transparent text-headingColor'} 
                                 w-full py-2 text-[16px] rounded-md hover:bg-indigo-50`}
                 >
-                    Overview
+                   Aperçu général
                 </button>
                 <button 
                     onClick={() => setTab('appointments')} 
                     className={`${tab === 'appointments' ? 'bg-indigo-100 text-primaryColor' : 'bg-transparent text-headingColor'} 
                                 w-full py-2 text-[16px] rounded-md hover:bg-indigo-50`}
                 >
-                    Appointments
+                    Réservations
                 </button>
                 <button 
                     onClick={() => setTab('settings')} 
