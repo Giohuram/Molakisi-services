@@ -3,10 +3,11 @@ import starIcon from '../../assets/images/Star.png';
 import { Link } from 'react-router-dom';
 import { BiArrowToRight } from 'react-icons/bi';
 
-const Doctorcard = ({ doctor }) => {
+const TutorCard = ({ tutor, experiences }) => {
 
-    const {name, avgRating, totalRating, photo, specialization, totalPatients, hospital} = doctor; 
+    const {name, avgRating, totalRating, photo, specialization } = tutor; 
 
+    console.log(tutor); 
   return (
     <div className='p-3 lg:p-5'>
        <div>
@@ -24,8 +25,8 @@ const Doctorcard = ({ doctor }) => {
        </div>
        <div className='mt-[18px] lg:mt-5 flex items-center justify-between'>
           <div>
-            <h3 className='text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor'>+{totalPatients} patients</h3>
-            <p className='text-[14px] leading-6 font-[400] text-textColor'>At {hospital}</p>
+            {/* <h3 className='text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor'>+{totalPatients} patients</h3> */}
+            <p className='text-[14px] leading-6 font-[400] text-textColor'>At {experiences && experiences[0]?.hospital}</p>
           </div>
 
           <Link to="/tutors" className='w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] flex items-center justify-center group hover:bg-primaryColor hover:border-none' >
@@ -37,4 +38,4 @@ const Doctorcard = ({ doctor }) => {
   )
 }
 
-export default Doctorcard
+export default TutorCard; 

@@ -14,29 +14,34 @@ const useFetchData = (url) => {
           throw new Error('No token found. Please log in.');
         }
         
-        // console.log('Token being sent:', token); // Log token for debugging
-
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+    
         const result = await res.json();
-
+    
         if (!res.ok) {
           if (res.status === 401) {
             throw new Error('Unauthorized. Session may have expired.');
           }
           throw new Error(result.message || 'Erreur serveur');
         }
-
+    
         setData(result.data);
       } catch (error) {
-        console.error('Fetch error:', error); // Log error for debugging
+        // Add user redirect if necessary
+        if (error.message.includes('No token found')) {
+          // Redirect to login or show login prompt
+          console.error('User is not logged in. Redirecting to login...');
+          // For example, window.location.href = '/login';
+        }
+    
         setError(error.message || 'Something went wrong');
       } finally {
         setLoading(false);
       }
     };
+    
 
     fetchData();
   }, [url]);

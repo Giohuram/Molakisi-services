@@ -81,9 +81,11 @@ const Dashboard = () => {
                   <TutorAbout 
                     name={data?.name || 'N/A'}  
                     about={data?.about || 'N/A'} 
-                    qualifications={data?.qualifications || 'N/A'}
-                    experiences={data?.experiences || 'N/A'}
+                    qualifications={data?.qualifications || []} // Use an empty array instead of 'N/A'
+                    experiences={data?.experiences || []} // Use an empty array instead of 'N/A'
+                    timeSlots={data?.timeSlots || []} // Add this line to pass timeSlots
                   />
+
                 </div>
               )}
               {tab === 'appointments' && <Appointments appointments={data.appointments}/>}

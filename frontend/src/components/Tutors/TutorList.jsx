@@ -1,13 +1,30 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
-import {doctors} from '../../assets/data/doctors'
-import TutorCard from './TutorCard'
+import {BASE_URL} from './../../config';
+import useFetchData from './../../hooks/useFetchData';
+import Error from '../../components/Error/Error';
+import TutorCard from './TutorCard';
+import '../../Styles/TutorList.css'; // Add custom CSS for scrolling effect
 
-const DoctorList = () => {
+const TutorList = () => {
+
+  const { data: tutors, error } = useFetchData(`${BASE_URL}/tutors`);
+
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]'>
-        {doctors.map((doctor) => <TutorCard key={doctor.id} doctor={doctor} />)}
-    </div>
-  )
+    <>
+      {error && <Error />}
+      {!error && tutors && (  // Check if tutors is not null and not undefined
+        <div className="tutor-list-container mt-[30px] lg:mt-[55px]">
+          <div className="tutor-row">
+            {tutors.map(tutor => ( 
+              <TutorCard key={tutor.id} tutor={tutor} />  
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
-export default DoctorList
+export default TutorList;
+

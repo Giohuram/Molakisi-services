@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const navlinks = [
   { path: '/home', display: 'Home' },
-  { path: '/doctors', display: 'Find a Doctor' },
+  { path: '/tutors', display: 'Trouver un répétiteur' },
   { path: '/services', display: 'Services' },
   { path: '/contact', display: 'Contact' },
 ];

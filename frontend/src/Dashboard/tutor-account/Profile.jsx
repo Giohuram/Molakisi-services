@@ -8,21 +8,21 @@ import { toast } from "react-toastify";
 
 
 const Profile = ({ tutorData }) => {
-   const [formData, setFormData] = useState({
-        name:'', 
-        email:'',
-        password:'',
-        phone:'', 
-        bio: '',
-        gender: '', 
-        specialization: '', 
-        ticketPrice: 0,
-        qualifications: [],
-        experiences: [],
-        timeSlots: [], 
-        about: '', 
-        photo:null
-   });
+    const [formData, setFormData] = useState({
+        name: tutorData.name || '',
+        email: tutorData.email || '',
+        password: tutorData.password || '',
+        phone: tutorData.phone || '',
+        bio: tutorData.bio || '',
+        gender: tutorData.gender || '',
+        specialization: tutorData.specialization || '',
+        ticketPrice: tutorData.ticketPrice || 0,
+        qualifications: tutorData.qualifications || [],
+        experiences: tutorData.experiences || [],
+        timeSlots: tutorData.timeSlots || [],
+        about: tutorData.about || '',
+        photo: tutorData.photo || null,
+      });      
 
    useEffect(()=>{
     setFormData({
@@ -57,13 +57,13 @@ const Profile = ({ tutorData }) => {
 
     try {
         const res = await fetch(`${BASE_URL}/tutors/${tutorData._id}`, {
-            method:'PUT',
-            headers:{
-                'content-type': 'application/json',
-                Authorization: `Bearer ${token}`
+            method: 'PUT',
+            headers: {
+              'content-type': 'application/json',
+              Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(formData)
-        })
+            body: JSON.stringify(formData),
+          });          
 
         const result = await res.json()
 
@@ -84,21 +84,20 @@ const Profile = ({ tutorData }) => {
    }
 
    // reusable input change function 
-   const handleReusableInputChangeFunc = (key, index, event) =>{
-    const [name, value] = event.target
-
+   const handleReusableInputChangeFunc = (key, index, event) => {
+    const { name, value } = event.target;
+  
     setFormData(prevFormData => {
-        const updateItems = [ ...prevFormData[key]]
-        
-        updateItems[index][name] = value 
-
-        return {
-            ...prevFormData,
-            [key]: updateItems,  
-        }
-
-    })
-   }
+      const updateItems = [...prevFormData[key]];
+  
+      updateItems[index] = { ...updateItems[index], [name]: value };
+  
+      return {
+        ...prevFormData,
+        [key]: updateItems,
+      };
+    });
+  };  
 
    // reusable function for deleting item
    const deleteItem = (key, index) => {
@@ -162,10 +161,25 @@ const Profile = ({ tutorData }) => {
     })
    };
 
-   const handleTimeSlotChange = (event, index)=>{
-    handleReusableInputChangeFunc('timeSlots', index, event)
-   }
-
+   const handleTimeSlotChange = (e, index) => {
+    const { name, value } = e.target;
+  
+    // Create a copy of the current formData timeSlots array
+    const updatedTimeSlots = [...formData.timeSlots];
+  
+    // Update the specific timeslot at the given index
+    updatedTimeSlots[index] = {
+      ...updatedTimeSlots[index],
+      [name]: value, // Dynamically update 'startingTime' or 'endingTime'
+    };
+  
+    // Set the updated timeSlots array within the formData state
+    setFormData((prevFormData) => ({
+      ...prevFormData,           // Copy other fields in formData
+      timeSlots: updatedTimeSlots, // Update only timeSlots
+    }));
+  };
+  
    const deleteTimeSlot = (e, index)=>{
     e.preventDefault()
     deleteItem('timeSlots', index)
@@ -421,52 +435,47 @@ const Profile = ({ tutorData }) => {
                                 <div className="grid grid-cols-2 md:grid-cols-4 mb-[30px] gap-5">
                                     <div >
                                         <p className="form__label">Jour*</p>
-                                        <select name="day" value={item.day} className="form__input py-3.5">
-                                            <option value="">choisir</option>
-                                            <option value="Monday">Lundi</option>
-                                            <option value="Tuesday">Mardi</option>
-                                            <option value="Wednesday">Mercredi</option>
-                                            <option value="Thursday">Jeudi</option>
-                                            <option value="Friday">Vendredi</option>
-                                            <option value="Saturday">Samedi</option>
-                                            <option value="Sunday">Dimanche</option>
-                                        </select>
+                                        <select 
+                                            name="day" 
+                                            value={item.day} 
+                                            className="form__input py-3.5"
+                                            onChange={(e) => handleTimeSlotChange(e, index)}>
+                                                <option value="Monday">Lundi</option>
+                                                <option value="Tuesday">Mardi</option>
+                                                <option value="Wednesday">Mercredi</option>
+                                                <option value="Thursday">Jeudi</option>
+                                                <option value="Friday">Vendredi</option>
+                                                <option value="Saturday">Samedi</option>
+                                                <option value="Sunday">Dimanche</option>
+                                            </select>
+
                                     </div>
-                                    <div >
+                                    <div>
                                         <p className="form__label ">Heure du début*</p>
                                         <input
-                                           type="time"
-                                           name="startingTime"
-                                           value={item.startingTime}
-                                           className="form__input"
-                                           onChange={(e) => handleTimeSlotChange(e, index)}
+                                            type="time"
+                                            name="startingTime"
+                                            value={item.startingTime || ''}  
+                                            className="form__input"
+                                            onChange={(e) => handleTimeSlotChange(e, index)}
                                         />
                                     </div>
                                     <div>
                                         <p className="form__label ">Heure de fin*</p>
                                         <input
-                                           type="time"
-                                           name="endingTime"
-                                           value={item.endingTime}
-                                           className="form__input"
-                                           onChange={(e) => handleTimeSlotChange(e, index)}
+                                            type="time"
+                                            name="endingTime"
+                                            value={item.endingTime || ''} 
+                                            className="form__input"
+                                            onChange={(e) => handleTimeSlotChange(e, index)}
                                         />
-                                    </div>
-                                    <div className="flex items-center">
-                                        <button
-                                        type="button"
-                                        onClick={(e) => deleteTimeSlot(e, index)}
-                                        className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-7  cursor-pointer"
-                                        >
-                                        <AiOutlineDelete />
-                                        </button>
                                     </div>
                                 </div>
                                 </div>
                             </div>
                         ))}
 
-                        {/* Add Qualification Button */}
+                        {/* Add TimeSlot Button */}
                         <button
                             type="button"
                             onClick={AddTimeSlot}

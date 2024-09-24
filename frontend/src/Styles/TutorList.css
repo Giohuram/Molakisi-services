@@ -1,0 +1,24 @@
+/* TutorList.css */
+.tutor-list-container {
+    overflow-x: hidden; /* Hide the horizontal scrollbar */
+    position: relative;
+  }
+  
+  .tutor-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem; /* Space between the cards */
+    padding: 20px;
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+  }
+  
+  .tutor-row::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  .tutor-card {
+    flex: 0 0 auto; /* Make sure each card is not shrinkable and takes its own space */
+    width: 200px; /* Adjust card width */
+    height: 300px; /* Adjust card height */
+  }
+  
