@@ -11,7 +11,7 @@ import reviewRoute from './Routes/review.js';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3000;
 
 // Updated CORS configuration
 const corsOptions = {
@@ -25,6 +25,13 @@ app.use(cors(corsOptions)); // Apply CORS middleware
 app.get('/', (req, res) => {
     res.send('Api is working');
 });
+
+// Serve static files
+app.get('/src/assets/data/tutors.js', (req, res) => {
+    res.type('application/javascript'); // Set correct MIME type
+    res.sendFile(path.join(__dirname, 'src/assets/data/tutors.js'));
+});
+
 
 // Database connection
 mongoose.set('strictQuery', false);

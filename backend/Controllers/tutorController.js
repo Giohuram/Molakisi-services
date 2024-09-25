@@ -1,5 +1,7 @@
 import Tutor from '../models/TutorSchema.js';
 import Booking from '../models/BookingSchema.js';
+// import { tutors as mockTutors } from 'frontend/src/assets/data/tutors.js'; // Importing the mock data from your frontend directory
+
 
 // Update a tutor
 export const updateTutor = async (req, res) => {
@@ -100,3 +102,4 @@ export const getTutorProfile = async (req, res) => {
         res.status(500).json({ success: false, message: 'Erreur serveur' });
     }
 };
+
