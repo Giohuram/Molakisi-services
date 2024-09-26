@@ -13,21 +13,33 @@ export const getAllReviews = async (req, res) => {
 }; 
 
 // create review 
-export const createReview = async(req, res)=>{
-    if(!req.body.tutor) req.body.tutor = req.params.tutorId
-    if(!req.body.user) req.body.user = req.userId
+export const createReview = async (req, res) => {
+  if (!req.body.tutor) req.body.tutor = req.params.tutorId;
+  if (!req.body.user) req.body.user = req.userId;
 
-    const newReview = new Review(req.body)
+  // Validate rating
+  if (!req.body.rating || req.body.rating < 1 || req.body.rating > 5) {
+    return res.status(400).json({ success: false, message: 'Rating must be between 1 and 5' });
+  }
 
-    try {
-        const savedReview = await newReview.save()
+  const newReview = new Review(req.body);
 
-        await Tutor.findByIdAndUpdate(req.body.tutor, {
-            $push:{reviews: savedReview._id}
-        })
+  try {
+    const savedReview = await newReview.save();
+    
+    // Log the saved review
+    console.log("Saved Review:", savedReview); // This should be here inside the try block
 
-        res.status(200).json({success:true, message:'review submitted successfully'})
-    } catch (error) {
-        res.status(200).json({success:false, message: err.message})
-    }
-}
+    // Push the review ID to the tutor's reviews array
+    await Tutor.findByIdAndUpdate(req.body.tutor, {
+      $push: { reviews: savedReview._id }
+    });
+
+    // Recalculate average ratings for the tutor
+    await Review.calcAverageRatings(req.body.tutor);
+
+    res.status(200).json({ success: true, message: 'Review submitted successfully' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

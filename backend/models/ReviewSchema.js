@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Tutor from '../models/TutorSchema.js'; // Import the Tutor model
+import Tutor from '../models/TutorSchema.js'; 
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -18,9 +18,8 @@ const reviewSchema = new mongoose.Schema(
     rating: {
       type: Number,
       required: true,
-      min: 0,
+      min: 1,
       max: 5,
-      default: 0,
     },
   },
   { timestamps: true }
@@ -31,14 +30,12 @@ reviewSchema.pre(/^find/, function(next) {
     path: 'user', 
     select: "name photo", 
   });
-
   next(); 
 });
 
 reviewSchema.statics.calcAverageRatings = async function(tutorId) {
-  // this points the current review
   const stats = await this.aggregate([
-    { $match: { tutor: tutorId }},
+    { $match: { tutor: tutorId } },
     {
       $group: {
         _id: '$tutor',
@@ -48,14 +45,14 @@ reviewSchema.statics.calcAverageRatings = async function(tutorId) {
     }
   ]);
 
-  // Ensure stats are available before updating
+  console.log("Aggregation Result:", stats);  // Debugging
+  
   if (stats.length > 0) {
     await Tutor.findByIdAndUpdate(tutorId, {
-      totalRating: stats[0].numOfRating, 
-      averageRating: stats[0].avgRating, 
+      totalRating: stats[0].numOfRating,
+      averageRating: stats[0].avgRating,
     });
   } else {
-    // If no reviews, set default ratings
     await Tutor.findByIdAndUpdate(tutorId, {
       totalRating: 0,
       averageRating: 0,
@@ -63,9 +60,9 @@ reviewSchema.statics.calcAverageRatings = async function(tutorId) {
   }
 };
 
-reviewSchema.post('save', function() {
-  // After saving a review, recalculate the tutor's average ratings
-  this.constructor.calcAverageRatings(this.tutor);
+reviewSchema.post('save', async function() {
+  // Ensure async function
+  await this.constructor.calcAverageRatings(this.tutor);
 });
 
-export default mongoose.model("Review", reviewSchema);
+export default mongoose.model("Review", reviewSchema);  
