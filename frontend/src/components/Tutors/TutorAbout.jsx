@@ -1,9 +1,20 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { formateDate } from '../../utils/formateDate';
+import { formateTime } from '../../utils/formateTime'; // import the new function
 
 const TutorAbout = ({ name, about, qualifications, experiences, timeSlots }) => {
+
+  const dayTranslations = {
+    monday: "Lundi",
+    tuesday: "Mardi",
+    wednesday: "Mercredi",
+    thursday: "Jeudi",
+    friday: "Vendredi",
+    saturday: "Samedi",
+    sunday: "Dimanche",
+  };
+
   return (
     <div>
       <div className='text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2'>
@@ -49,21 +60,31 @@ const TutorAbout = ({ name, about, qualifications, experiences, timeSlots }) => 
         </ul>
       </div>
 
-      {/* Timeslots Section */}
-        <div className='mt-12'>
-          <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold'>
-            Disponibilité
-          </h3>
-          <ul className='grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5'>
-            {timeSlots?.map((slot, index) => (
-              <li key={index} className='p-4 rounded bg-[#e7f3ff]'>
-                <span className='text-blueColor text-[15px] leading-6 font-semibold'>
-                  {slot.day}: {slot.startingTime} - {slot.endingTime}
-                </span>
-              </li>
-            ))}
+      {/* Time Slots Section */}
+      <div className='mt-12'>
+        <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold'>
+          Horaire de Travail
+        </h3>
+        <div className="mt-[30px]">
+          <ul className="mt-3">
+            {timeSlots?.length > 0 ? (
+              timeSlots.map((item, index) => (
+                <li key={index} className="flex items-center justify-between mb-2">
+                  <p className="text-[15px] leading-6 text-textColor font-semibold">
+                    {dayTranslations[item.day.toLowerCase()] || item.day}
+                  </p>
+                  <p className="text-[15px] leading-6 text-textColor font-semibold">
+                    {formateTime(item.startingTime)} - {formateTime(item.endingTime)}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <li className="text-[15px] leading-6 text-textColor font-semibold">Aucun créneau disponible</li>
+            )}
           </ul>
         </div>
+      </div>
+
     </div>
   );
 };

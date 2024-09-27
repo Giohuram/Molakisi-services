@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { BiArrowToRight } from 'react-icons/bi';
 import About from '../components/About/About';
 import ServicesList from '../components/Services/ServicesList';
-import TutorList from '../components/Tutors/TutorList';
+// import TutorList from '../components/Tutors/TutorList';
 import FaqList from '../components/Faq/faqList';
 import Testimonial from '../components/Testimonial/Testimonial';
 
@@ -206,17 +206,7 @@ const Home = () => {
           </div>
         </section>
          {/** feature section end*/}
-         {/** our great doctors */}
-        <section>
-          <div className='container'>
-            <div className='xl:w-[470px] mx-auto'>
-              <h2 className='heading text-center'>Nos répétiteurs</h2>
-              <p className='text__para text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-            <TutorList />
-          </div>
-        </section>    
-          {/** our great doctors end */}
+
         {/** faq section start */}
         <section className="py-[50px] lg:py-[80px]">
           <div className="container mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-[50px] lg:gap-[100px]">

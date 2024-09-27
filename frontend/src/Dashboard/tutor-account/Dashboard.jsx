@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // /* eslint-disable no-unused-vars */
 import useGetProfile from '../../hooks/useFetchData';
@@ -28,7 +29,8 @@ const Dashboard = () => {
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
         <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-          <Tabs tab={tab} setTab={setTab} />
+          {/* Pass the tutorId from the fetched data */}
+          <Tabs tab={tab} setTab={setTab} tutorId={data?._id} />  
           <div className='lg:col-span-2'>
             {data.isApproved === 'pending' && (
               <div className='flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg'>
@@ -81,9 +83,9 @@ const Dashboard = () => {
                   <TutorAbout 
                     name={data?.name || 'N/A'}  
                     about={data?.about || 'N/A'} 
-                    qualifications={data?.qualifications || []} // Use an empty array instead of 'N/A'
-                    experiences={data?.experiences || []} // Use an empty array instead of 'N/A'
-                    timeSlots={data?.timeSlots || []} // Add this line to pass timeSlots
+                    qualifications={data?.qualifications || []} 
+                    experiences={data?.experiences || []} 
+                    timeSlots={data?.timeSlots || []}
                   />
 
                 </div>
@@ -99,4 +101,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

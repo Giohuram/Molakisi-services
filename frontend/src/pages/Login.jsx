@@ -55,7 +55,7 @@ const Login = () => {
       console.log(result, 'login data');
       setLoading(false);
       toast.success(result.message);
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       toast.error(error.message); // Ensure error handling is correct
       setLoading(false);
@@ -104,3 +104,4 @@ const Login = () => {
 };
 
 export default Login;
+

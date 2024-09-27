@@ -1,62 +1,99 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
-import { AiFillStar } from 'react-icons/ai'
+import React, { useState } from 'react';
+import { AiFillStar } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
+import { BASE_URL, token } from '../../config';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';  // Import PropTypes for validation
 
-const FeedbackForm = () => {
-
+const FeedbackForm = ({ onReviewSubmitted }) => {
   const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);   
-  const [reviewText, setReviewText] = useState('');  
+  const [hover, setHover] = useState(0);
+  const [reviewText, setReviewText] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmitReview = async e => {
-    e.preventDefault(); 
+  const { id } = useParams();
 
-    // Later we will use our api
-  }
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      if (!rating || !reviewText) {
+        setLoading(false);
+        return toast.error('Vous devez d\'abord cocher les étoiles et remplir le formulaire');
+      }
+
+      const res = await fetch(`${BASE_URL}/tutors/${id}/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      setLoading(false);
+      toast.success(result.message);
+
+      // Call the callback function to refetch the tutor data
+      if (onReviewSubmitted) {
+        onReviewSubmitted();
+      }
+
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
+    }
+  };
 
   return (
-    <form action="">
-        <div>
-           <h3 className='text-headingColor text-[16px] leading-6 font-semibold mb-4 mt-0'>
-            How would you rate the overall experience ?*
-           </h3> 
-           <div>
-             {[...Array(5).keys()].map((_,index)=> {
-                index+=1
+    <form onSubmit={handleSubmitReview}>
+      {/* Rating stars */}
+      <div>
+        {[...Array(5).keys()].map((_, index) => {
+          index += 1;
+          return (
+            <button
+              key={index}
+              type="button"
+              className={`${index <= (hover || rating) ? 'text-yellowColor' : 'text-gray-400'} bg-transparent border-none outline-none text-[22px] cursor-pointer`}
+              onClick={() => setRating(index)}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(rating)}
+            >
+              <AiFillStar />
+            </button>
+          );
+        })}
+      </div>
 
-                return (
-                   <button 
-                     key={index} 
-                     type="button" 
-                     className={`${index < ((rating && hover) || hover ) ? 'text-yellowColor' : 'text-gray-400'} bg-transparent border-none outline-none text-[22px] cursor-pointer`}
-                     onClick={()=>setRating(index)} 
-                     onMouseEnter={()=>setHover(index)}
-                     onMouseLeave={()=>setHover(rating)}
-                     onDoubleClick={()=>{
-                        setHover(0); 
-                        setRating(0);
-                        }}
-                     >
-                    <span><AiFillStar /></span>
-                    </button>
-                )
-             })}
-           </div>
-        </div>
+      {/* Restored the original size of the textarea */}
+      <textarea
+        placeholder="Write your message"
+        value={reviewText}
+        onChange={(e) => setReviewText(e.target.value)}
+        className="w-full border p-2 rounded"  // Adjust styling to fit your original design
+        required
+      />
 
-        <div className='mt-[30px]'>
-            <h3 className='text-headingColor text-[16px] leading-6 font-semibold mb-4 mt-0'>
-              Share your feedback or suggestions*
-            </h3> 
-
-            <textarea className='border border-solid border-[#0066ff34] focus:outline outline-primaryColor w-full px-4 py-3 rounded-md' rows="5" placeholder='Write your message' onChange={e => setReviewText(e.target.value)}></textarea>
-        </div>
-        
-        <button type="submit" onClick={handleSubmitReview} className='btn'>
-            Submit Feedback     
-        </button>
+      <button type="submit" className="btn" disabled={loading}>
+        {loading ? 'Submitting...' : 'Envoyer votre feedback'}
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default FeedbackForm
+// Add prop types validation for onReviewSubmitted
+FeedbackForm.propTypes = {
+  onReviewSubmitted: PropTypes.func, // Add PropTypes validation
+};
+
+export default FeedbackForm;
+

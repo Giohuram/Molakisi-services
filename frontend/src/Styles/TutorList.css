@@ -1,8 +1,11 @@
 /* TutorList.css */
 .tutor-list-container {
-    overflow-x: hidden; /* Hide the horizontal scrollbar */
-    position: relative;
-  }
+  width: 100%; /* Ensure full width */
+  max-width: 1200px; /* Optional: max width for larger screens */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  position: relative;
+}
+
   
   .tutor-row {
     display: flex;
@@ -22,3 +25,20 @@
     height: 300px; /* Adjust card height */
   }
   
+  /* TutorCard.css */
+/* Add these styles */
+.tutor-image-container {
+  width: 100%; /* Set container to full width of its parent */
+  max-width: 150px; /* Define a max width for the container */
+  height: auto; /* Allow height to be automatic */
+  overflow: hidden; /* Hide any overflow to prevent stretching */
+  margin: 0 auto; /* Center the image container */
+}
+
+.tutor-image {
+  width: 100%; /* Make the image take the full width of its container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the container without stretching */
+  border-radius: 8px; /* Optional: rounded corners */
+}
+
