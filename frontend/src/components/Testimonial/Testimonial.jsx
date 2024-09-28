@@ -36,7 +36,7 @@ const Testimonial = () => {
                 <img src={patientAvatar} alt="Giovanni Huram" />
                 <div>
                   <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                    Giovanni Huram
+                   — Sarah K.
                   </h4>
                   <div className='flex items-center gap-[2px]'>
                     <HiStar className='text-yellowColor w-[18px] h-5' />
@@ -48,7 +48,7 @@ const Testimonial = () => {
                 </div>
               </div>
               <p className='text-[16px] leading-7 mt-4 text-textColor font-[400]'>
-                "I have taken medical services from them. They treat so well and they are providing the best medical services."
+               "Les cours à domicile avec Anglais na ndaku ont transformé ma manière d'apprendre. J'apprécie la flexibilité et le soutien que je reçois de mon enseignant."
               </p>
 
             </div>
@@ -60,7 +60,7 @@ const Testimonial = () => {
                 <img src={patientAvatar} alt="Giovanni Huram" />
                 <div>
                   <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                    Giovanni Huram
+                   — Marc T.
                   </h4>
                   <div className='flex items-center gap-[2px]'>
                     <HiStar className='text-yellowColor w-[18px] h-5' />
@@ -72,7 +72,7 @@ const Testimonial = () => {
                 </div>
               </div>
               <p className='text-[16px] leading-7 mt-4 text-textColor font-[400]'>
-                "I have taken medical services from them. They treat so well and they are providing the best medical services."
+               "J'ai amélioré mes compétences en anglais de manière significative grâce à la méthode d'enseignement personnalisée. Je recommande vivement cette école !"
               </p>
 
             </div>
@@ -84,7 +84,7 @@ const Testimonial = () => {
                 <img src={patientAvatar} alt="Giovanni Huram" />
                 <div>
                   <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                    Giovanni Huram
+                    — Linda M.
                   </h4>
                   <div className='flex items-center gap-[2px]'>
                     <HiStar className='text-yellowColor w-[18px] h-5' />
@@ -96,57 +96,8 @@ const Testimonial = () => {
                 </div>
               </div>
               <p className='text-[16px] leading-7 mt-4 text-textColor font-[400]'>
-                "I have taken medical services from them. They treat so well and they are providing the best medical services."
+                "L'ambiance est très conviviale et les cours sont adaptés à mes besoins. Merci, Anglais na ndaku !"
               </p>
-
-            </div>
-          </SwiperSlide>
-          {/* SwiperSlide 4 */}
-          <SwiperSlide>
-            <div className='py-[30px] px-5 rounded-3'>
-              <div className='flex items-center gap-[13px]'>
-                <img src={patientAvatar} alt="Giovanni Huram" />
-                <div>
-                  <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                    Giovanni Huram
-                  </h4>
-                  <div className='flex items-center gap-[2px]'>
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                  </div>
-                </div>
-              </div>
-              <p className='text-[16px] leading-7 mt-4 text-textColor font-[400]'>
-                "I have taken medical services from them. They treat so well and they are providing the best medical services."
-              </p>
-
-            </div>
-          </SwiperSlide>
-          {/* SwiperSlide 5 */}
-          <SwiperSlide>
-            <div className='py-[30px] px-5 rounded-3'>
-              <div className='flex items-center gap-[13px]'>
-                <img src={patientAvatar} alt="Giovanni Huram" />
-                <div>
-                  <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                    Giovanni Huram
-                  </h4>
-                  <div className='flex items-center gap-[2px]'>
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                  </div>
-                </div>
-              </div>
-              <p className='text-[16px] leading-7 mt-4 text-textColor font-[400]'>
-                "I have taken medical services from them. They treat so well and they are providing the best medical services."
-              </p>
-
             </div>
           </SwiperSlide>
         </Swiper>      

@@ -3,70 +3,40 @@ import logo from '../../assets/images/logo.png';
 import { AiFillYoutube, AiFillInstagram, AiFillFacebook, AiFillLinkedin } from 'react-icons/ai';
 
 const socialLinks = [
-   {
+  {
     path: "#",
-    Icon: <AiFillYoutube className='group-hover:text-white w-4 h-5' />,
-   },  
-   {
+    Icon: <AiFillYoutube className='hover:text-primaryColor w-6 h-6' />,
+  },  
+  {
     path: "#",
-    Icon: <AiFillFacebook className='group-hover:text-white w-4 h-5' />,
-   }, 
-   {
+    Icon: <AiFillFacebook className='hover:text-primaryColor w-6 h-6' />,
+  }, 
+  {
     path: "#",
-    Icon: <AiFillInstagram className='group-hover:text-white w-4 h-5' />,
-   }, 
-   {
+    Icon: <AiFillInstagram className='hover:text-primaryColor w-6 h-6' />,
+  }, 
+  {
     path: "#",
-    Icon: <AiFillLinkedin className='group-hover:text-white w-4 h-5' />,
-   }, 
+    Icon: <AiFillLinkedin className='hover:text-primaryColor w-6 h-6' />,
+  }, 
 ];
 
 const quickLinks01 = [
   {
-   path: "/home",
-   display: "Home", 
+    path: "/home",
+    display: "Accueil", 
   },
   {
-    path: "/",
-    display: "About us", 
-   },
-   {
+    path: "/tutors",
+    display: "Trouver un répétiteur", 
+  },
+  {
     path: "/services",
     display: "Services", 
-   },
-   {
-    path: "/",
-    display: "Blog", 
-   },
-];
-
-const quickLinks02 = [
-  {
-    path: "/find-a-doctor",
-    display: "Find a Doctor", 
   },
   {
-    path: "/",
-    display: "Request an appointment", 
-  },
-  {
-    path: "/",
-    display: "Find a Location", 
-  },
-  {
-    path: "/",
-    display: "Get an Opinion", 
-  },
-];
-
-const quickLinks03 = [
-  {
-    path: "/",
-    display: "Donate", 
-  },
-  {
-    path: "/",
-    display: "Contact Us", 
+    path: "/contact",
+    display: "Contact", 
   },
 ];
 
@@ -74,70 +44,45 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="pb-16 pt-10">
-      <div className='container'>
-       <div className='flex justify-between flex-col md:flex-row flex-wrap gap-[30px] lg:gap-[50px]'>
-          <div>
-            <img src={logo} alt="Logo" />
-            <p className='text-[16px] leading-7 font-[400] text-textColor mt-4'>
-              Copyright {year} developed by Giovanni Huram Masala. All rights reserved.
-            </p>
+    <footer className="bg-gradient-to-r from-[#cae9f5] to-[#fef6e4] text-black py-8">
+      <div className='container mx-auto text-center'>
+        {/* Logo */}
+        <div className='mb-6'>
+          <img src={logo} alt="Molakisi Logo" className='mx-auto w-28' />
+        </div>
 
-            <div className='flex gap-4 mt-4'>
-              {socialLinks.map((link, index) => (
-                <Link 
-                  to={link.path} 
-                  key={index} 
-                  className='w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none'
-                >
-                  {link.Icon}
-                </Link>
-              ))}
-            </div>
-          </div>
-          
-          <div>
-            <h2 className='text-[20px] leading-[30px] font-[700] mb-6 text-headingColor'>
-              Quick Links    
-            </h2>
-            <ul>
-              {quickLinks01.map((item, index) => (
-                <li key={index} className='mb-4'>
-                  <Link to={item.path} className='text-[16px] leading-7 font-[400] text-textColor'>{item.display}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h2 className='text-[20px] leading-[30px] font-[700] mb-6 text-headingColor'>
-              I want to:     
-            </h2>
-            <ul>
-              {quickLinks02.map((item, index) => (
-                <li key={index} className='mb-4'>
-                  <Link to={item.path} className='text-[16px] leading-7 font-[400] text-textColor'>{item.display}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h2 className='text-[20px] leading-[30px] font-[700] mb-6 text-headingColor'>
-              Support   
-            </h2>
-            <ul>
-              {quickLinks03.map((item, index) => (
-                <li key={index} className='mb-4'>
-                  <Link to={item.path} className='text-[16px] leading-7 font-[400] text-textColor'>{item.display}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-       </div>
-      </div>   
+        {/* Menu Links */}
+        <ul className='flex justify-center space-x-6 mb-6'>
+          {quickLinks01.map((item, index) => (
+            <li key={index}>
+              <Link to={item.path} className='text-[16px] hover:text-primaryColor'>
+                {item.display}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Social Icons */}
+        <div className='flex justify-center space-x-6 mb-6'>
+          {socialLinks.map((link, index) => (
+            <Link 
+              to={link.path} 
+              key={index} 
+              className='w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition duration-300'
+            >
+              {link.Icon}
+            </Link>
+          ))}
+        </div>
+
+        {/* Footer Text */}
+        <p className='text-[14px] leading-7'>
+          Copyright {year} Molakisi Business Group. <br/>
+          Developed by Giovanni Huram Masala. All rights reserved.
+        </p>
+      </div>
     </footer>
-  )
+  );
 }
 
 export default Footer;

@@ -5,7 +5,7 @@ import { BiMenu, BiChevronDown } from 'react-icons/bi';
 import { AuthContext } from '../../context/AuthContext';
 
 const navlinks = [
-  { path: '/home', display: 'Home' },
+  { path: '/home', display: 'Accueil' },
   { path: '/tutors', display: 'Trouver un répétiteur' },
   { path: '/services', display: 'Services' },
   { path: '/contact', display: 'Contact' },

@@ -18,13 +18,16 @@ const About = () => {
 
             {/** about content */}
             <div className='w-full lg:w-1/2 xl:w-[670px] order-1 lg:order-2'>
-                <h2 className='heading'>Proud to be one of the nations best</h2>
-                <p className='text__para'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eligendi in ipsa soluta accusantium magni aliquam, hic inventore debitis assumenda, animi dignissimos totam ea corrupti consectetur molestiae a esse natus?</p>
+                <h2 className='heading'>Notre Vision</h2>
+                <p className='text__para'>
+                  Chez Anglais na ndaku, nous croyons que l&apos;apprentissage de l&apos;anglais devrait être accessible à tous, peu importe leur emploi du temps ou leur niveau. Nous nous engageons à offrir des cours de qualité, adaptés aux besoins individuels de chaque apprenant, tout en créant un environnement d&apos;apprentissage positif et stimulant.
+                </p>
+                <p className="text__para mt-[10px]">
+                 Nous utilisons des méthodes d&apos;enseignement modernes et interactives qui favorisent l&apos;engagement et la participation active. Que ce soit par le biais de jeux de rôle, de discussions, ou de projets pratiques, notre objectif est de rendre l&apos;apprentissage de l&apos;anglais agréable et efficace.
+                </p>
 
-                <p className="text__para mt-[30px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt eaque sit similique obcaecati velit rerum vel, omnis cumque inventore quis blanditiis accusamus fuga? Ea, alias officia quibusdam facere repudiandae consectetur?</p>
-
-                <Link to="/">
-                  <button className='btn'>Learn More</button>
+                <Link to="/tutors">
+                  <button className='btn'>Réservez maintenant</button>
                 </Link>
             </div>
 

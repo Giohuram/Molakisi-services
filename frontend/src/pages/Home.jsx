@@ -6,12 +6,9 @@ import icon02 from '../assets/images/icon02.png';
 import icon03 from '../assets/images/icon03.png';
 import featureImg from '../assets/images/feature-img.png';
 import faqImg from '../assets/images/faq-img.png';
-import videoIcon from '../assets/images/video-icon.png';
-import avatarIcon from '../assets/images/avatar-icon.png';
 import { Link } from 'react-router-dom';
 import { BiArrowToRight } from 'react-icons/bi';
 import About from '../components/About/About';
-import ServicesList from '../components/Services/ServicesList';
 // import TutorList from '../components/Tutors/TutorList';
 import FaqList from '../components/Faq/faqList';
 import Testimonial from '../components/Testimonial/Testimonial';
@@ -27,38 +24,40 @@ const Home = () => {
             {/* ============ Left Hero Content ================= */}
             <div className='lg:w-[570px]'>
               <h1 className='text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]'>
-                We help patients live a healthy, longer life.
+                Vous faire parler l&apos;anglais en 3 Mois, c&apos;est notre objectif.
               </h1>  
               <p className='text-[16px] leading-[28px] text-textColor mt-[20px]'>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus quaerat cumque fugit, perspiciatis cum nemo aperiam, aut quia earum amet architecto, modi odio. Soluta unde ducimus perferendis?
+              Bienvenue sur Anglais na ndaku, votre école d&apos;anglais spécialisée dans les cours à domicile. Nous sommes dédiés à vous offrir une expérience d&apos;apprentissage personnalisée et accessible, directement depuis le confort de votre maison.
               </p>
-
+             <Link to="/tutors">
               <button className='btn bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-3 px-8 rounded-full text-white font-semibold mt-[30px]' aria-label="Request an appointment">
-                Request an Appointment
-              </button>
+                  Faire une réservation
+                </button>
+             </Link>
+              
 
               {/* ======== Hero Counter ======== */}
               <div className='mt-[30px] lg:mt-[50px] flex flex-col lg:flex-row lg:items-center gap-10'>
                 <div className='text-center'>
                   <h2 className='text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor'>
-                    30+
+                    20+
                   </h2>
                   <span className='w-[100px] h-2 bg-yellowColor rounded-full block mx-auto mt-[-14px]'></span>
-                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Years of Experience</p>
+                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Année d&apos;Experience</p>
                 </div>
                 <div className='text-center'>
                   <h2 className='text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor'>
                     15+
                   </h2>
                   <span className='w-[100px] h-2 bg-purpleColor rounded-full block mx-auto mt-[-14px]'></span>
-                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Clinic Locations</p>
+                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Prof d&apos;anglais</p>
                 </div>
                 <div className='text-center'>
                   <h2 className='text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor'>
                     100%
                   </h2>
                   <span className='w-[100px] h-2 bg-irisBlueColor rounded-full block mx-auto mt-[-14px]'></span>
-                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Patient Satisfaction</p>
+                  <p className='text-[16px] leading-[28px] text-textColor mt-2'>Apprenants satisfaits</p>
                 </div>
               </div>
             </div>
@@ -80,9 +79,9 @@ const Home = () => {
        <section>
         <div className='container'>
           <div className='lg:w-[470px mx-auto'>
-            <h2 className='heading text-center'>Providing the best medical services</h2>
+            <h2 className='heading text-center'>Fournir une formation qualité</h2>
             <p className='text__para text-center'>
-              World-class care for everyone. Our health System offers unmatched, expert health care.
+              Nous Offrons des cours d&apos;anglais adaptés et à tous les niveaux des enfants aux adultes.
             </p>
           </div>
 
@@ -92,9 +91,11 @@ const Home = () => {
                 <img src={icon01} alt='' />
               </div>
               <div className='mt-[30px]'>
-                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>Find a Doctor</h2>
+                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>
+                  Trouver un répétiteur 
+                </h2>
                 <p className='text-[16px] leading-7 text-textColor font-[400] mt-4 text-center'>
-                  World-class care for everyone, Our health system offers unmatched, expert health care. From the lab to the clinic.
+                  Nos enseignants sont des experts passionnés par l&apos;enseignement de l&apos;anglais.
                 </p>
                 <Link to="/tutors" className='w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none' >
                   <BiArrowToRight className='group-hover:text-white w-6 h-5' />
@@ -106,9 +107,11 @@ const Home = () => {
                 <img src={icon02} alt='' />
               </div>
               <div className='mt-[30px]'>
-                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>Find a Location</h2>
+                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>
+                  À domicile
+                </h2>
                 <p className='text-[16px] leading-7 text-textColor font-[400] mt-4 text-center'>
-                  World-class care for everyone, Our health system offers unmatched, expert health care. From the lab to the clinic.
+                  Apprenez l&apos;anglais dans le confort de votre maison avec un enseignant qualifié. 
                 </p>
                 <Link to="/tutors" className='w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none' >
                   <BiArrowToRight className='group-hover:text-white w-6 h-5' />
@@ -120,9 +123,10 @@ const Home = () => {
                 <img src={icon03} alt='' />
               </div>
               <div className='mt-[30px]'>
-                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>Book Appointment</h2>
+                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>
+                  Réservez en ligne</h2>
                 <p className='text-[16px] leading-7 text-textColor font-[400] mt-4 text-center'>
-                  World-class care for everyone, Our health system offers unmatched, expert health care. From the lab to the clinic.
+                  Après avoir choisi l&apos;enseignant de votre choix, faites votre réservation en ligne.
                 </p>
                 <Link to="/tutors" className='w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none' >
                   <BiArrowToRight className='group-hover:text-white w-6 h-5' />
@@ -135,21 +139,6 @@ const Home = () => {
 
        <About />
 
-       {/** services section start */}
-       <section>
-          <div className='container'>
-            <div className='xl:w-[470px] mx-auto'>
-              <h2 className='heading text-center'>Our medical services</h2>
-              <p className='text__para text-center'>
-                World-class care for everyone. Our health System offers unmatched, expert health care. 
-              </p>
-            </div>
-
-            <ServicesList />
-          </div>
-       </section> 
-       {/** services section end */}
-
         {/** feature section start*/}
         <section>
           <div className="container">
@@ -157,50 +146,25 @@ const Home = () => {
                {/** feature content*/}
                <div className='xl:w-[670px]'>
                  <h2 className='heading'>
-                   Get virtual treatment <br /> anytime.
+                   Nos objectifs.
                  </h2>
                  <ul className="pl-4">
                   <li className="text__para">
-                    1. Schedule the appointment directly
+                    1. Offrir des cours d&apos;anglais adaptés à tous les niveaux.
                   </li>
                   <li className="text__para">
-                    2. Search for your physician here, and contact their office.
+                    2. Favoriser un apprentissage interactif et engageant.
                   </li>
                   <li className="text__para">
-                    3. View our physicians who are accepting new patients, use the online scheduling tool to select an appointment time.
+                    3. Assurer la flexibilité des horaires pour s&apos;adapter à votre emploi du temps.
                   </li>
                  </ul>
-                 <Link to="/"><button className="btn">Learn More</button></Link>
+                 <Link to="/Services"><button className="btn">En savoir plus</button></Link>
                </div>
 
                               {/** feature img */}
                 <div className='relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0'>
                   <img src={featureImg} className='w-3/4' alt="" />
-                </div>
-
-                <div className='w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0 md:bottom-[100px] md:left-5 z-20 p-2 pb-3 lg:pt-4 lg:px-4 lg:pb-[26px] rounded-[10px]'>
-                   <div className='flex items-center justify-between'>
-                      <div className='flex items-center gap-[6px] lg:gap-3'>
-                        <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-headingColor font-[600]'>
-                          Tue, 24
-                        </p>
-                        <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-textColor font-[400]'>
-                          10:00 AM
-                        </p>
-                      </div>
-                      <span className='w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded py-1 px-[6px] lg:py-3 lg:px-[9px]'>
-                        <img src={videoIcon} alt="" />
-                      </span>
-                   </div>
-
-                   <div className="w-[65px] lg:w-[96px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 text-irisBlueColor font-[500] mt-2 lg:mt-4 rounded-full">
-                    Consultation
-                   </div>
-
-                   <div className='flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[10px]'>
-                      <img src={avatarIcon} alt='' />
-                      <h4 className='text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor'>John Mwenze</h4>
-                   </div>
                 </div>
             </div>
           </div>
@@ -219,7 +183,7 @@ const Home = () => {
             {/* Right Side FAQ Content */}
             <div className="w-full lg:w-1/2">
               <h2 className="text-[30px] md:text-[36px] leading-[40px] md:leading-[44px] font-semibold text-headingColor mb-[30px] lg:mb-[40px]">
-                Most questions by our beloved patients
+                FAQ
               </h2>
               <FaqList />
             </div>
@@ -233,8 +197,8 @@ const Home = () => {
           <section>
             <div className='container'>
               <div className="xl:w-[470px] mx-auto">
-                <h2 className='heading text-center'>What our patient say</h2>
-                <p className='text__para text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi voluptatum corrupti nemo ea ex ad.</p>
+                <h2 className='heading text-center'>Ce que disents nos Apprenants</h2>
+                <p className='text__para text-center'>100 % de nos apprenants sont satisfait de nos services et nous avons hâtes de vous avoir comme apprenant.</p>
               </div>
 
               <Testimonial />
