@@ -17,13 +17,13 @@ const FeedbackForm = ({ onReviewSubmitted }) => {
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       if (!rating || !reviewText) {
         setLoading(false);
         return toast.error('Vous devez d\'abord cocher les étoiles et remplir le formulaire');
       }
-
+  
       const res = await fetch(`${BASE_URL}/tutors/${id}/reviews`, {
         method: 'POST',
         headers: {
@@ -32,26 +32,30 @@ const FeedbackForm = ({ onReviewSubmitted }) => {
         },
         body: JSON.stringify({ rating, reviewText }),
       });
-
+  
       const result = await res.json();
-
+  
       if (!res.ok) {
         throw new Error(result.message);
       }
-
+  
       setLoading(false);
       toast.success(result.message);
-
+  
+      // Reset the form after successful submission
+      setRating(0);
+      setReviewText('');
+  
       // Call the callback function to refetch the tutor data
       if (onReviewSubmitted) {
         onReviewSubmitted();
       }
-
     } catch (error) {
       setLoading(false);
       toast.error(error.message);
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmitReview}>
@@ -74,14 +78,15 @@ const FeedbackForm = ({ onReviewSubmitted }) => {
         })}
       </div>
 
-      {/* Restored the original size of the textarea */}
+      {/* Review text */}
       <textarea
+        rows="10"  // Increases vertical size
+        className="w-full h-32 p-3 border rounded-lg" // Adjusts width and height with padding
         placeholder="Write your message"
-        value={reviewText}
         onChange={(e) => setReviewText(e.target.value)}
-        className="w-full border p-2 rounded"  // Adjust styling to fit your original design
         required
       />
+
 
       <button type="submit" className="btn" disabled={loading}>
         {loading ? 'Submitting...' : 'Envoyer votre feedback'}
@@ -96,4 +101,3 @@ FeedbackForm.propTypes = {
 };
 
 export default FeedbackForm;
-

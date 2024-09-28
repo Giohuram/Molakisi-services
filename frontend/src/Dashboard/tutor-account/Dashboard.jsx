@@ -18,8 +18,8 @@ const Dashboard = () => {
   const isDataAvailable = data && data.isApproved;
 
   if (error) {
-    return <div>Error loading profile data.</div>;
-  }
+    return <div>{error.message || 'Error loading profile data.'}</div>;
+  }  
 
   if (!data) {
     return <div>Loading...</div>; // Handle the loading state when data is null
@@ -29,8 +29,7 @@ const Dashboard = () => {
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
         <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-          {/* Pass the tutorId from the fetched data */}
-          <Tabs tab={tab} setTab={setTab} tutorId={data?._id} />  
+        <Tabs tab={tab} setTab={setTab} tutorId={data.id} />
           <div className='lg:col-span-2'>
             {data.isApproved === 'pending' && (
               <div className='flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg'>
@@ -83,8 +82,8 @@ const Dashboard = () => {
                   <TutorAbout 
                     name={data?.name || 'N/A'}  
                     about={data?.about || 'N/A'} 
-                    qualifications={data?.qualifications || []} 
-                    experiences={data?.experiences || []} 
+                    qualifications={data?.qualifications || []} // Use an empty array instead of 'N/A'
+                    experiences={data?.experiences || []} // Use an empty array instead of 'N/A'
                     timeSlots={data?.timeSlots || []}
                   />
 
@@ -101,3 +100,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
