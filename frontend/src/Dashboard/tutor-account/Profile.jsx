@@ -6,6 +6,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import uploadImageToCloudinary from './../../utils/uploadCloudinary';
 import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
+import debounce from 'lodash.debounce';
 
 const Profile = ({ tutorData }) => {
     const [formData, setFormData] = useState({
@@ -23,6 +24,9 @@ const Profile = ({ tutorData }) => {
         about: tutorData.about || '',
         photo: tutorData.photo || null,
     });
+
+    const [loading, setLoading] = useState(false); // For optimistic UI
+    const [previewImage, setPreviewImage] = useState(null); // For image preview
 
     useEffect(() => {
         setFormData({
@@ -45,15 +49,27 @@ const Profile = ({ tutorData }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Debounced input change handler to prevent excessive API calls
+    const debouncedHandleInputChange = debounce((e) => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }, 300);
+
+    // Directly handles file input change and previews image before upload
     const handleFileInputChange = async event => {
         const file = event.target.files[0];
-        const data = await uploadImageToCloudinary(file);
-        setFormData({ ...formData, photo: data?.url });
+        if (file) {
+            const previewUrl = URL.createObjectURL(file);
+            setPreviewImage(previewUrl); // Preview the image
+            const data = await uploadImageToCloudinary(file);
+            setFormData(prev => ({ ...prev, photo: data?.url }));
+        }
     };
 
+    // Optimistic UI update for form submission
     const updateProfileHandler = async e => {
         e.preventDefault();
-
+        const previousData = { ...formData }; // Save current state for rollback if necessary
+        setLoading(true); // Show loading indicator
         try {
             const res = await fetch(`${BASE_URL}/tutors/${tutorData._id}`, {
                 method: 'PUT',
@@ -65,13 +81,15 @@ const Profile = ({ tutorData }) => {
             });
 
             const result = await res.json();
+            setLoading(false);
 
             if (!res.ok) {
                 throw new Error(result.message);
             }
-
             toast.success(result.message);
         } catch (error) {
+            setFormData(previousData); // Revert on failure
+            setLoading(false);
             toast.error(error.message);
         }
     };
@@ -144,17 +162,21 @@ const Profile = ({ tutorData }) => {
         deleteItem('timeSlots', index);
     };
 
+
     return (
         <div>
-            <h2 className="text-headingColor font-bold text-[24px] leading-9 mb-10">Informations du profile</h2>
+            <h2 className="text-headingColor font-bold text-[24px] leading-9 mb-10">
+                Informations du profile
+            </h2>
             <form onSubmit={updateProfileHandler}>
+                {/* Form Fields */}
                 <div className="mb-5">
                     <p className="form__label">Nom complet*</p>
                     <input 
                         type="text"
                         name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
+                        defaultValue={formData.name}
+                        onChange={debouncedHandleInputChange} // Debounced input handling
                         placeholder="Veuillez écrire votre nom complet"
                         className="form__input"
                         required
@@ -193,7 +215,7 @@ const Profile = ({ tutorData }) => {
                         name="bio"
                         value={formData.bio}
                         onChange={handleInputChange}
-                        placeholder="votre biographie"
+                        placeholder="vos années d'expérience en tant prof d'anglais"
                         className="form__input"
                         maxLength={100}
                         required
@@ -213,17 +235,17 @@ const Profile = ({ tutorData }) => {
                         <p className="form__label">Spécialisation*</p>
                         <select name="specialization" value={formData.specialization} onChange={handleInputChange} className="form__input py-3.5">
                             <option value="">Choisir</option>
-                            <option value="primaire">Anglais Américain</option>
-                            <option value="secondaire">Anglais Britanique</option>
-                            <option value="Général">Anglais des affaires</option>
-                            <option value="Général">Anglais Général</option>
+                            <option value="American English">Anglais Américain</option>
+                            <option value="British English">Anglais Britanique</option>
+                            <option value="Business English">Anglais des affaires</option>
+                            <option value="General English">Anglais Général</option>
                         </select>
                     </div>
                     <div className="mb-5">
-                        <p className="form__label">Frais de cours en $USD</p>
+                        <p className="form__label">Frais*</p>
                         <input 
                             type="number"
-                            placeholder="100"
+                            placeholder="50"
                             name="ticketPrice"
                             value={formData.ticketPrice}
                             className="form__input"
@@ -250,14 +272,14 @@ const Profile = ({ tutorData }) => {
                                 />
                                 </div>
                                 <div>
-                                <p className="form__label">Date de fin*</p>
-                                <input
-                                    type="date"
-                                    name="endingDate"
-                                    value={item.endingDate}
-                                    className="form__input w-full"
-                                    onChange={(e) => handleQualificationChange(e, index)}
-                                />
+                                    <p className="form__label">Date de fin*</p>
+                                    <input
+                                        type="date"
+                                        name="endingDate"
+                                        value={item.endingDate}
+                                        className="form__input w-full"
+                                        onChange={(e) => handleQualificationChange(e, index)}
+                                    />
                                 </div>
                             </div>
 
@@ -432,11 +454,14 @@ const Profile = ({ tutorData }) => {
                         accept="image/*"
                         className="form__input"
                     />
+                    {previewImage && <img src={previewImage} alt="Profile Preview" className="mt-2 w-32 h-32 object-cover" />}
                 </div>
 
                 <div className="mb-5 flex gap-5 justify-end">
                     <button type="button" onClick={() => setFormData(tutorData)} className="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded">Annuler</button>
-                    <button type="submit" className="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded">Mettre à jour</button>
+                    <button type="submit" className="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded">
+                        {loading ? 'Mise à jour...' : 'Mettre à jour'} {/* Loading indicator */}
+                    </button>
                 </div>
             </form>
         </div>

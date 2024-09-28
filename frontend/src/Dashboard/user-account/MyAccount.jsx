@@ -20,6 +20,7 @@ const MyAccount = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch({ type: "LOGOUT" });
+    navigate('/');
   };
 
   if (loading) {
@@ -30,21 +31,14 @@ const MyAccount = () => {
     return <p>Error: {error}</p>; // Show error state
   }
 
-  // Provide fallback if userData is null or undefined
   const userProfile = userData || { name: "Giovanni Masala", email: "example@gmail.com" };
 
   const handleDeleteAccount = async () => {
-    // console.log('Delete button clicked');
-    // console.log('User ID:', userData._id); // Use the user ID from fetched data
-
     const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');
-    // console.log('Confirm delete result:', confirmDelete);
-
     if (confirmDelete) {
       try {
         const apiUrl = `${BASE_URL}/users/${userData._id}`; // Use the user ID from fetched data
-        // console.log('API URL:', apiUrl);
-
+  
         const response = await fetch(apiUrl, {
           method: 'DELETE',
           headers: {
@@ -52,10 +46,7 @@ const MyAccount = () => {
             'Authorization': `Bearer ${token}` // Ensure the token is valid
           }
         });
-
-        // console.log('Full response:', response);
-        // console.log('Response Status:', response.status);
-
+        
         if (response.ok) {
           console.log('Account deleted successfully');
           dispatch({ type: 'LOGOUT' });
@@ -78,35 +69,51 @@ const MyAccount = () => {
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
         {error && <Error />}
-        <div className="grid md:grid-cols-3 gap-10">
-          <div className="pb-[50px] px-[30px] rounded-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+          <div className="pb-5 px-5 md:px-[30px] rounded-md">
             <div className="flex items-center justify-center">
-              <figure className="w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor">
+              <figure className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full border-2 border-solid border-primaryColor">
                 <img 
-                  src={userProfile.photo} // Ensure photo is available
+                  src={userProfile.photo || '/path/to/default/image.png'} // Ensure photo is available
                   alt="User profile"
-                  className="w-full h-full rounded-full"                  
+                  className="w-full h-full rounded-full object-cover"
                 />
               </figure>
             </div>
             <div className="text-center mt-4">
-              <h3 className="text-[18px] leading-[30px] text-headingColor font-bold">{userProfile.name}</h3>
-              <p className="text-textColor text-[15px] leading-6 font-medium">{userProfile.email}</p>
+              <h3 className="text-[16px] md:text-[18px] leading-[24px] md:leading-[30px] text-headingColor font-bold">{userProfile.name}</h3>
+              <p className="text-textColor text-[14px] md:text-[15px] leading-6 font-medium">{userProfile.email}</p>
             </div>
-            <div className="mt-[50px] md:mt-[10px]">
-              <button onClick={handleLogout} className="w-full bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white">Se déconnecter</button>
-              <button onClick={handleDeleteAccount} className="w-full bg-red-600 p-3 text-[16px] mt-3 leading-7 rounded-md text-white">Éffacer mon compte</button>
+            <div className="mt-[30px] md:mt-[50px]">
+              <button 
+                onClick={handleLogout} 
+                className="w-full bg-[#181A1E] p-2 md:p-3 text-[14px] md:text-[16px] leading-7 rounded-md text-white">
+                Se déconnecter
+              </button>
+              <button 
+                onClick={handleDeleteAccount} 
+                className="w-full bg-red-600 p-2 md:p-3 text-[14px] md:text-[16px] mt-3 leading-7 rounded-md text-white">
+                Éffacer mon compte
+              </button>
             </div>
           </div>  
-          <div className='md:col-span-2 md:px-[30px]'>
-            <div>
-              <button onClick={() => setTab('bookings')} className={`${tab === "bookings" && 'bg-primaryColor text-white font-normal'} p-2 mr-5 px-5 rounded-md text-headingColor font-semibold text-[16px] leading-7 border border-solid border-primaryColor`}>Mes réservations</button>
-              <button onClick={() => setTab('settings')} className={`${tab === "settings" && 'bg-primaryColor text-white font-normal'} p-2 px-5 rounded-md text-headingColor font-semibold text-[16px] leading-7 border border-solid border-primaryColor`}>
+          <div className='col-span-2 md:col-span-2 px-5 md:px-[30px]'>
+            <div className="flex justify-center md:justify-start">
+              <button 
+                onClick={() => setTab('bookings')} 
+                className={`${tab === "bookings" && 'bg-primaryColor text-white font-normal'} p-2 md:px-5 rounded-md text-headingColor font-semibold text-[14px] md:text-[16px] leading-7 border border-solid border-primaryColor mr-3`}>
+                Mes réservations
+              </button>
+              <button 
+                onClick={() => setTab('settings')} 
+                className={`${tab === "settings" && 'bg-primaryColor text-white font-normal'} p-2 md:px-5 rounded-md text-headingColor font-semibold text-[14px] md:text-[16px] leading-7 border border-solid border-primaryColor`}>
                 Réglages Profile
               </button>
             </div>
-            {tab === 'bookings' && <MyBookings />}  
-            {tab === 'settings' && <Profile user={userData} />}  
+            <div className="mt-4">
+              {tab === 'bookings' && <MyBookings />}  
+              {tab === 'settings' && <Profile user={userData} />}  
+            </div>
           </div>
         </div>
       </div>
