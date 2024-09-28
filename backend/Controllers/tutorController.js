@@ -1,6 +1,5 @@
 import Tutor from '../models/TutorSchema.js';
 import Booking from '../models/BookingSchema.js';
-// import { tutors as mockTutors } from 'frontend/src/assets/data/tutors.js'; // Importing the mock data from your frontend directory
 
 
 // Update a tutor
@@ -19,9 +18,16 @@ export const updateTutor = async (req, res) => {
     }
 };
 
-// Delete a tutor
+// Delete Tutor 
 export const deleteTutor = async (req, res) => {
     const id = req.params.id;
+
+    if (!id) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid tutor ID",
+        });
+    }
 
     try {
         await Tutor.findByIdAndDelete(id);
@@ -34,7 +40,7 @@ export const deleteTutor = async (req, res) => {
     }
 };
 
-// Get a single tutor by ID
+
 export const getSingleTutor = async (req, res) => {
     const id = req.params.id;
 

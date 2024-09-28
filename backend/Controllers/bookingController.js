@@ -42,7 +42,7 @@ export const getCheckoutSession = async (req, res) => {
       const mobileMoneyPayload = {
         merchant,
         phone: req.body.phone,
-        amount: tutor.ticketPrice,
+        amount: 10,
         currency: "USD",
         reference: `booking-${Date.now()}`,
         callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/api/flexpay-callback`,  // Corrected callback URL
@@ -80,7 +80,7 @@ export const getCheckoutSession = async (req, res) => {
         const cardPaymentPayload = {
           authorization: token,   
           merchant,
-          amount: tutor.ticketPrice,
+          amount: 10,
           currency: "USD",
           reference: `booking-${Date.now()}`,
           callback_url: `${process.env.CLIENT_SITE_URL}/api/flexpay-callback`, 

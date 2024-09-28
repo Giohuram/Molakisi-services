@@ -22,4 +22,7 @@ router.get('/profile/me', authenticate, restrict(["student"]), getUserProfile);
 // Route to get the current user's appointments
 router.get('/appointments/my-appointments', authenticate, restrict(["student"]), getMyAppointment);
 
+// Delete a booking
+// router.delete('/appointments/:bookingId', authenticate, restrict(["student"]), deleteBooking);
+
 export default router;
