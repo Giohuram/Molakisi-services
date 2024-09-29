@@ -60,7 +60,9 @@ const TutorDetails = () => {
                   <span className="bg-[#CCF0F3] text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 text-[12px] leading-4 lg:text-[16px] lg:leading-7 font-semibold rounded">
                     {bio}
                   </span>
-                  <h3 className="text-headingColor text-[22px] leading-9 mt-2 font-bold">{name}</h3>
+                  <h3 className="text-headingColor text-[22px] leading-9 mt-2 font-bold">{name}
+                  </h3>
+                  <p>{specialization}</p>
                 </div>
               </div>
   

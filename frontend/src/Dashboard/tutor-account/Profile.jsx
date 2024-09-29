@@ -459,7 +459,7 @@ const Profile = ({ tutorData }) => {
 
                 <div className="mb-5 flex gap-5 justify-end">
                     <button type="button" onClick={() => setFormData(tutorData)} className="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded">Annuler</button>
-                    <button type="submit" className="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded">
+                    <button  type="submit" className="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded">
                         {loading ? 'Mise à jour...' : 'Mettre à jour'} {/* Loading indicator */}
                     </button>
                 </div>

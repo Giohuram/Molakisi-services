@@ -70,7 +70,8 @@ export const getAllTutor = async (req, res) => {
                 isApproved: 'approved',
                 $or: [
                     { name: { $regex: query, $options: "i" } },
-                    { specialization: { $regex: query, $options: "i" } }
+                    { specialization: { $regex: query, $options: "i" } },
+                    { bio: { $regex: query, $options: "i" } } // Add this line to include the city search
                 ],
             }).select("-password");
         } else {
