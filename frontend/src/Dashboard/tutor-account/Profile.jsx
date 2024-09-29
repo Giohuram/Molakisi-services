@@ -209,13 +209,13 @@ const Profile = ({ tutorData }) => {
                     />
                 </div>
                 <div className="mb-5">
-                    <p className="form__label">Bio*</p>
+                    <p className="form__label">Ville*</p>
                     <input 
                         type="text"
                         name="bio"
                         value={formData.bio}
                         onChange={handleInputChange}
-                        placeholder="vos années d'expérience en tant prof d'anglais"
+                        placeholder="veuillez écrire ici votre ville de travail"
                         className="form__input"
                         maxLength={100}
                         required
