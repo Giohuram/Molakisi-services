@@ -17,7 +17,7 @@ export const faqs = [
   },
   {
     "question": "Y a-t-il des frais d'inscription ?",
-    "content": "Oui les frais d'inscription sont payable une seule fois lors de la réservation et il revient à $ 10 USD."
+    "content": "Oui le frais d'inscription sont payable une seule fois lors de la réservation et n'est pas remboursable. Il revient à $ 10 USD."
   },
   {
     "question": "Proposez-vous des cours pour enfants ?",

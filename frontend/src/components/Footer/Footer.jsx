@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { AiFillYoutube, AiFillInstagram, AiFillFacebook, AiFillLinkedin } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const socialLinks = [
   {
@@ -8,11 +8,11 @@ const socialLinks = [
     Icon: <AiFillYoutube className='hover:text-primaryColor w-6 h-6' />,
   },  
   {
-    path: "#",
+    path: "https://web.facebook.com/molakisiservices",
     Icon: <AiFillFacebook className='hover:text-primaryColor w-6 h-6' />,
   }, 
   {
-    path: "#",
+    path: "https://www.instagram.com/molakisi_services/",
     Icon: <AiFillInstagram className='hover:text-primaryColor w-6 h-6' />,
   }, 
   {
@@ -65,13 +65,15 @@ const Footer = () => {
         {/* Social Icons */}
         <div className='flex justify-center space-x-6 mb-6'>
           {socialLinks.map((link, index) => (
-            <Link 
-              to={link.path} 
+            <a 
+              href={link.path} 
               key={index} 
+              target="_blank" 
+              rel="noopener noreferrer" 
               className='w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition duration-300'
             >
               {link.Icon}
-            </Link>
+            </a>
           ))}
         </div>
 

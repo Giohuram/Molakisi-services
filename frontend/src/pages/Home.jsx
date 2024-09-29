@@ -27,7 +27,7 @@ const Home = () => {
                   Vous faire parler l&apos;anglais en peu de temps, c&apos;est notre boulot.
                 </h1>  
                 <p className='text-[16px] leading-[28px] text-textColor mt-[20px]'>
-                  Bienvenue sur Anglais na ndaku.com, un service d&apos;anglais spécialisée dans les cours à domicile offert par Molakisi Business Group. Nous sommes dédiés à vous offrir une expérience d&apos;apprentissage personnalisée et accessible, directement depuis le confort de votre maison et bureau.
+                  Bienvenue sur Anglais na ndaku.com, un service d&apos;anglais spécialisée dans les cours à domicile offert par Molakisi Business Group. Nous sommes dédiés à vous offrir une expérience d&apos;apprentissage personnalisée et accessible, directement depuis le confort de votre maison.
                 </p>
                 <Link to="/tutors">
                   <button className='btn bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-3 px-8 rounded-full text-white font-semibold mt-[30px]'>
@@ -79,7 +79,7 @@ const Home = () => {
        <section>
         <div className='container'>
           <div className='lg:w-[470px mx-auto'>
-            <h2 className='heading text-center'>Fournir une formation qualité</h2>
+            <h2 className='heading text-center'>Fournir une formation de qualité</h2>
             <p className='text__para text-center'>
               Nous Offrons des cours d&apos;anglais adaptés et à tous les niveaux des enfants aux adultes.
             </p>

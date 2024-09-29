@@ -75,7 +75,7 @@ const Header = () => {
           <div className="header__logo">
             <img src={logo} alt="Molakisi Logo" className="w-[150px] h-auto" />
           </div>
-          
+
           {/* Menu */}
           <div className={`navigation ${isMenuOpen ? 'show__menu' : 'hidden md:flex'}`} ref={menuRef}>
             <ul className="menu flex flex-col md:flex-row md:items-center md:gap-[2.7rem] bg-white md:bg-transparent p-4 md:p-0 border-t md:border-none">
@@ -123,7 +123,7 @@ const Header = () => {
               </div>
             ) : (
               <Link to="/login">
-                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">Login</button>
+                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">Se connecter</button>
               </Link>
             )}
 
