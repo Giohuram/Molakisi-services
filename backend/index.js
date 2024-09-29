@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
 
 // Updated CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:5173', // Allow requests from this origin
+    origin: ['http://localhost:5173', 'https://www.anglaisnandaku.com'],  // Allow requests from this origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
 };

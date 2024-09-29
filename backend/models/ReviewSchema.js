@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Tutor from '../models/TutorSchema.js'; 
+import Tutor from './TutorSchema.js'; 
 
 const reviewSchema = new mongoose.Schema(
   {
